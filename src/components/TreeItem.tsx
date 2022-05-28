@@ -1,4 +1,5 @@
 import React from "react";
+import "./TreeItem.scss";
 
 type TreeItemProps = {
 	id: string;
@@ -7,7 +8,12 @@ type TreeItemProps = {
 };
 
 const TreeItem = ({ label, children }: TreeItemProps) => {
-	return <div>{label}</div>;
+	return (
+		<div>
+			<div>{label}</div>
+			<div className="child-style">{children}</div>
+		</div>
+	);
 };
 
 export default TreeItem;
