@@ -1,4 +1,4 @@
-type TreeBranch = {
+export type TreeBranch = {
 	label: string;
 	id: number;
 	branches?: Tree;

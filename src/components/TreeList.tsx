@@ -1,19 +1,31 @@
-import React from 'react';
-import { Tree } from '../data/tree';
+import React, { Fragment } from "react";
+
+import { Tree, TreeBranch } from "../data/tree";
+import TreeItem from "./TreeItem";
 
 type TreeListProps = {
-    data: Tree
-}
+	data: Tree;
+};
 
-const TreeList = (props : TreeListProps) => {
+const TreeList = (props: TreeListProps) => {
+	const { data } = props;
 
-    const { data } = props;
+	const generateTree = (branch: TreeBranch) =>
+		branch.branches && (
+			<TreeItem id={String(branch.id)} label={branch.label} key={branch.id}>
+				{branch?.branches?.map((branch: TreeBranch) => {
+					return <Fragment key={branch.id}>{generateTree(branch)}</Fragment>;
+				})}
+			</TreeItem>
+		);
 
-    return (
-        <div>
-            {data[0]?.label}
-        </div>
-    );
+	return (
+		<div>
+			{data.map((datum: TreeBranch) => {
+				return <div key={datum.id}>{generateTree(datum)}</div>;
+			})}
+		</div>
+	);
 };
 
 export default TreeList;
